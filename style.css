@@ -3,13 +3,14 @@
 }
 
 body {
-    margin: 0 auto;
+    margin: 0;
     background-color: #0B2434;
     padding: 20px;
     font-family: 'Karla', sans-serif;
 }
 
 main {
+    margin: 5em auto;
     background-color: #F5F5F5;
     height: 400px;
     max-width: 800px;
