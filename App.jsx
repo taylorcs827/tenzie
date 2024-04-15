@@ -4,7 +4,7 @@ import {nanoid} from "nanoid"
 import Confetti from "react-confetti"
 
 export default function App() {
-
+    // State variables
     const [dice, setDice] = React.useState(allNewDice())
     const [tenzies, setTenzies] = React.useState(false)
     const [count, setCount] = React.useState(0)
@@ -12,7 +12,9 @@ export default function App() {
     localStorage.getItem("bestScore") || 0
   );
 
+    // Effect to check for tenzies and update best score
   React.useEffect(() => {
+      // Check if all dice are held and have the same value
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
     const allSameValue = dice.every((die) => die.value === firstValue);
@@ -27,6 +29,7 @@ export default function App() {
     }
   }, [dice, count, bestScore]);
 
+     // Function to generate a new die object
     function generateNewDie() {
         return {
             value: Math.ceil(Math.random() * 6),
@@ -34,7 +37,8 @@ export default function App() {
             id: nanoid()
         }
     }
-    
+
+    // Function to generate an array of new dice
     function allNewDice() {
         const newDice = []
         for (let i = 0; i < 10; i++) {
@@ -42,7 +46,8 @@ export default function App() {
         }
         return newDice
     }
-    
+
+    // Function to roll the dice
     function rollDice() {
     let newCount = count;
     if (!tenzies) {
@@ -54,12 +59,14 @@ export default function App() {
       newCount++;
       setCount(newCount);
     } else {
+        // If tenzies, start a new game
       setTenzies(false);
       setDice(allNewDice());
       setCount(0);
     }
   }
-    
+
+    // Function to toggle holding a die
     function holdDice(id) {
         setDice(oldDice => oldDice.map(die => {
             return die.id === id ? 
@@ -67,7 +74,8 @@ export default function App() {
                 die
         }))
     }
-    
+
+    // Map dice state to Die components
     const diceElements = dice.map(die => (
         <Die 
             key={die.id} 
