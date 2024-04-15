@@ -1,6 +1,8 @@
 import React from "react"
 
 export default function Die(props) {
+        // Determine background color based on whether the die is held or not
+
     const styles = {
         backgroundColor: props.isHeld ? "#59E391" : "white"
     }
